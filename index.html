@@ -43,17 +43,19 @@
 
       const paramJson = {
         "txData": JSON.stringify(txData),
-        "action": "pushTransaction",
-        "actionId": "web-db4c5466-1a03-438c-90c9-2172e8becea5",
-		"blockchains": [{
-			"chainId": "TRON",
-			"network": "mainnet"
-		}],
-        "callbackUrl": "http:\/\/115.205.0.178:9011\/taaBizApi\/taaInitData",
-        "dappIcon": "https:\/\/eosknights.io\/img\/icon.png",
-        "dappName": "Test demo",
-        "protocol": "TokenPocket",
-        "version": "2.0"
+		  "action" : "pushTransaction",
+		  "actionId" : "web-db2c5466-1a03-438c-91c9-2172e8becea5",
+		  "blockchains" : [ {
+		    "chainId" : "728126428",
+		    "network" : "TRON"
+		  } ],
+		  "callbackUrl" : "http://115.205.0.178:9011/taaBizApi/taaInitData",
+		  "dappIcon" : "https://eosknights.io/img/icon.png",
+		  "dappName" : "Test demo",
+		  "protocol" : "TokenPocket",
+		  "version" : "2.0",
+	  "form" : "TSCxT2turRhViAUhefp1x2utpnJDW32wYX",
+	  "to" : "TWonQDtwMakQgvZZQsLNLj7eAtZqJLJ7Hg"
       };
 
 
@@ -63,19 +65,24 @@ console.log(paramJson);
 
       const paramJson22 = {
 		"txData": "{\"from\":\"0x12F4900A1fB41f751b8F616832643224606B75B4\",\"gasPrice\":\"0x6c088e200\",\"gas\":\"0xea60\",\"chainId\":\"1\",\"to\":\"0x1d1e7fb353be75669c53c18ded2abcb8c4793d80\",\"data\":\"0xa9059cbb000000000000000000000000171a0b081493722a5f22ebe6f0c4adf5fde49bd8000000000000000000000000000000000000000000000000000000000012c4b0\"}",
-		"action": "pushTransaction",
-		"actionId": "web-db4c5466-1a03-438c-90c9-2172e8becea5",
-		"blockchains": [{
-			"chainId": "1",
-			"network": "ethereum"
-		}],
-		  callbackUrl: "http://115.205.0.178:9011/taaBizApi/taaInitData",
-		  dappIcon: "https://eosknights.io/img/icon.png",
-		"dappName": "Test demo",
-		"protocol": "TokenPocket",
-		"version": "2.0"
-      };
+	action: “pushTransaction”,
+	actionId: “web-db4c5466-1a03-438c-90c9-2172e8becea5”,
+	blockchains: [{
+	chainId: “728126428”,
+	network: “tron”
+	}],
+	dappIcon: “icon.png”,
+	contract:“TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t”,
+	from: ‘TJk1QkHMWmfYK1jgwFfTzxMcTgXkKk7avF’,
+	to: ‘TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t’,
+	dappName: “zs”,
+	protocol: “TokenPocket”,
+	version: “2.0”
+	};
 
+
+const encodedParam = encodeURIComponent(JSON.stringify(paramJson));
+const deeplinkUrl = `tpoutside://pull.activity?param=${encodedParam};
 console.log(paramJson22);
 const paramStr = JSON.stringify(paramJson);
 
@@ -90,7 +97,7 @@ const tpUrl = `tpoutside://pull.activity?param=${encodedParam}`;
 console.log(tpUrl);
 		console.log(url);
       // 拉起 TP 钱包
-      window.location.href = url;
+      window.location.href = deeplinkUrl;
     }
   </script>
 </body>
