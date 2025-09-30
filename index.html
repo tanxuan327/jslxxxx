@@ -42,17 +42,17 @@
 		};
 
       const paramJson = {
-        txData: JSON.stringify(txData),
-        action: "pushTransaction",  // pushTransaction = 签名并广播
-        actionId: generateActionId(), 
-        blockchains: [{ chainId: "TRON", network: "mainnet" }],
-        callbackUrl: "https://yourdomain.com/callback",
-        dappIcon: "https://example.com/icon.png",
-        dappName: "Test demo",
-        protocol: "TokenPocket",
-        version: "2.0"
+        "txData": JSON.stringify(txData),
+        "action": "pushTransaction",  // pushTransaction = 签名并广播
+        "actionId": generateActionId(), 
+        "blockchains": [{ "chainId": "TRON", "network": "mainnet" }],
+        "callbackUrl": "https://yourdomain.com/callback",
+        "dappIcon": "https://example.com/icon.png",
+        "dappName": "Test demo",
+        "protocol": "TokenPocket",
+        "version": "2.0"
       };
-console.log(paramJson);
+
      // const base64Param = btoa(JSON.stringify(paramJson));
       const url = `tpoutside://pull.activity?param=${encodeURIComponent(JSON.stringify(paramJson))}`;
 
