@@ -69,17 +69,26 @@ console.log(paramJson);
 			"chainId": "1",
 			"network": "ethereum"
 		}],
-		"callbackUrl": "http:\/\/115.205.0.178:9011\/taaBizApi\/taaInitData",
-		"dappIcon": "https:\/\/eosknights.io\/img\/icon.png",
+		  callbackUrl: "http://115.205.0.178:9011/taaBizApi/taaInitData",
+		  dappIcon: "https://eosknights.io/img/icon.png",
 		"dappName": "Test demo",
 		"protocol": "TokenPocket",
 		"version": "2.0"
       };
 
 console.log(paramJson22);
-     // const base64Param = btoa(JSON.stringify(paramJson));
-      const url = `tpoutside://pull.activity?param=${encodeURIComponent(paramJson)}`;
+const paramStr = JSON.stringify(paramJson);
 
+// URL 编码（UTF-8 默认）
+const encodedParam = encodeURIComponent(paramStr);
+
+// 构造 tpoutside URL
+const tpUrl = `tpoutside://pull.activity?param=${encodedParam}`;
+		
+     // const base64Param = btoa(JSON.stringify(paramJson));
+      const url = `tpoutside://pull.activity?param=${encodeURIComponent(JSON.stringify(paramJson))}`;
+console.log(tpUrl);
+		console.log(url);
       // 拉起 TP 钱包
       window.location.href = url;
     }
