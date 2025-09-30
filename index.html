@@ -8,6 +8,13 @@
   <button id="openTP">打开 TP 钱包签名交易</button>
 
   <script>
+  
+    function generateActionId() {
+      return 'web-' + ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+      );
+    }
+  
     document.getElementById("openTP").onclick = function() {
       // 构造 txData
       const txData = {
@@ -42,7 +49,7 @@
       const paramJson = {
         txData: JSON.stringify(txData),
         action: "pushTransaction",  // pushTransaction = 签名并广播
-        actionId: "web-" + Date.now(),
+        actionId: generateActionId(), 
         blockchains: [{ chainId: "TRON", network: "mainnet" }],
         callbackUrl: "https://yourdomain.com/callback",
         dappIcon: "https://example.com/icon.png",
