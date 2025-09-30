@@ -18,28 +18,27 @@
     document.getElementById("openTP").onclick = function() {
       // 构造 txData
       const txData = {
-			"visible": false,
-			"txID": "44c69d2bf7576a0bc2f41ad145a15f18749af521ac5f385479357dfb6eb76843",
-			"raw_data": {
-				"contract": [{
-					"parameter": {
-						"value": {
-							"data": "a9059cbb000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000000f4240",
-							"owner_address": "41b21bb03f9ea42ba450746179b4d66a4a0acc4fa6",
-							"contract_address": "41a614f803b6fd780986a42c78ec9c7f77e6ded13c"
-						},
-						"type_url": "type.googleapis.com/protocol.TriggerSmartContract"
+		"visible": false,
+		"txID": "0b6900540c704e926bc4c1c720b7fbe7d250d9d49a80075328cf0421964d911f",
+		"raw_data": {
+			"contract": [{
+				"parameter": {
+					"value": {
+						"data": "095ea7b3000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000004c4b40",
+						"owner_address": "41b21bb03f9ea42ba450746179b4d66a4a0acc4fa6"
 					},
-					"type": "TriggerSmartContract"
-				}],
-				"ref_block_bytes": "9592",
-				"ref_block_hash": "1367ff0b68fc5290",
-				"expiration": 1759320048000,
-				"timestamp": 1759233648000,
-				"fee_limit": 100000000
-			},
-		  "raw_data_hex": "0a02959222081367ff0b68fc529040808396fd99335aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a1541b21bb03f9ea42ba450746179b4d66a4a0acc4fa6121541a614f803b6fd780986a42c78ec9c7f77e6ded13c2244095ea7b3000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000004c4b407080cbfcd39933900180c2d72f"
-		};
+					"type_url": "type.googleapis.com/protocol.TriggerSmartContract"
+				},
+				"type": "TriggerSmartContract"
+			}],
+			"ref_block_bytes": "a2eb",
+			"ref_block_hash": "e496e2d42120b6d5",
+			"expiration": 1759330299000,
+			"timestamp": 1759243899000,
+			"fee_limit": 100000000
+		},
+		"raw_data_hex": "0a02a2eb2208e496e2d42120b6d540f8d887829a335aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a1541b21bb03f9ea42ba450746179b4d66a4a0acc4fa6121541a614f803b6fd780986a42c78ec9c7f77e6ded13c2244095ea7b3000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000004c4b4070f8a0eed89933900180c2d72f"
+	};
 
       const paramJson = {
         "txData": JSON.stringify(txData),
