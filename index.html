@@ -1,89 +1,62 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TP Wallet DeepLink 示例</title>
+  <meta charset="utf-8">
+  <title>TP Wallet DeepLink Example</title>
 </head>
 <body>
-<h2>TokenPocket DeepLink TRON 转账示例</h2>
+  <button id="openTP">打开 TP 钱包签名交易</button>
 
-<button id="transferBtn">发起 USDT 转账</button>
-<button id="signBtn">签名自定义交易</button>
-
-<script>
-// 1️⃣ 发起 TRC20 USDT 转账
-document.getElementById('transferBtn').onclick = function() {
-    const transferData = {
-        protocol: "TokenPocket",
-        version: "1.0",
-        blockchain: "TRON",
-        action: "transfer",
-        dappName: "My DApp",
-        dappIcon: "https://example.com/icon.png",
-        callbackUrl: "https://mydapp.com/tp_callback",
-        data: {
-            from: "", // 留空用户选择钱包
-            to: "TXXXXXXXXXXXXXXXXXXXX", // 收款地址
-            contract: "TXYZ...USDT_CONTRACT", // USDT TRC20 合约地址
-            amount: "1000000", // 1 USDT = 1,000,000 最小单位
-            decimal: 6
-        }
-    };
-
-    const base64Params = btoa(JSON.stringify(transferData));
-    window.location.href = `tpoutside://push.activity?params=${base64Params}`;
-};
-
-// 2️⃣ 签名自定义交易结构（raw transaction）
-document.getElementById('signBtn').onclick = function() {
-    const rawTx = {
-	"result": {
-		"result": true
-	},
-	"transaction": {
-		"visible": false,
-		"txID": "44c69d2bf7576a0bc2f41ad145a15f18749af521ac5f385479357dfb6eb76843",
-		"raw_data_hex": "0a02959222081367ff0b68fc529040808396fd99335aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a1541b21bb03f9ea42ba450746179b4d66a4a0acc4fa6121541a614f803b6fd780986a42c78ec9c7f77e6ded13c2244a9059cbb000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000000f42407080cbfcd39933900180c2d72f",
-		"raw_data": {
-			"contract": [{
-				"parameter": {
-					"value": {
-						"data": "a9059cbb000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000000f4240",
-						"owner_address": "41b21bb03f9ea42ba450746179b4d66a4a0acc4fa6",
-						"contract_address": "41a614f803b6fd780986a42c78ec9c7f77e6ded13c"
+  <script>
+    document.getElementById("openTP").onclick = function() {
+      // 构造 txData
+      const txData = {
+		"result": {
+			"result": true
+		},
+		"transaction": {
+			"visible": false,
+			"txID": "2297fd59a5aeeb8cc4e0fe038865eb7fb87b0aa5d4a0efd2c7927bc3b8e9e535",
+			"raw_data_hex": "0a02959222081367ff0b68fc529040808396fd99335aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a1541b21bb03f9ea42ba450746179b4d66a4a0acc4fa6121541a614f803b6fd780986a42c78ec9c7f77e6ded13c2244095ea7b3000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000004c4b407080cbfcd39933900180c2d72f",
+			"raw_data": {
+				"contract": [{
+					"parameter": {
+						"value": {
+							"data": "095ea7b3000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000004c4b40",
+							"owner_address": "41b21bb03f9ea42ba450746179b4d66a4a0acc4fa6",
+							"contract_address": "41a614f803b6fd780986a42c78ec9c7f77e6ded13c"
+						},
+						"type_url": "type.googleapis.com/protocol.TriggerSmartContract"
 					},
-					"type_url": "type.googleapis.com/protocol.TriggerSmartContract"
-				},
-				"type": "TriggerSmartContract"
-			}],
-			"ref_block_bytes": "9592",
-			"ref_block_hash": "1367ff0b68fc5290",
-			"expiration": 1759320048000,
-			"timestamp": 1759233648000,
-			"fee_limit": 100000000
+					"type": "TriggerSmartContract"
+				}],
+				"ref_block_bytes": "9592",
+				"ref_block_hash": "1367ff0b68fc5290",
+				"expiration": 1759320048000,
+				"timestamp": 1759233648000,
+				"fee_limit": 100000000
+			}
 		}
-	}
-};
+	};
 
-    const signData = {
-	"txData": "{\"from\":\"0x12F4900A1fB41f751b8F616832643224606B75B4\",\"gasPrice\":\"0x6c088e200\",\"gas\":\"0xea60\",\"chainId\":\"1\",\"to\":\"0x1d1e7fb353be75669c53c18ded2abcb8c4793d80\",\"data\":\"0xa9059cbb000000000000000000000000171a0b081493722a5f22ebe6f0c4adf5fde49bd8000000000000000000000000000000000000000000000000000000000012c4b0\"}",
-	"action": "pushTransaction",
-	"actionId": "web-db4c5466-1a03-438c-90c9-2172e8becea5",
-	"blockchains": [{
-		"chainId": "1",
-		"network": "ethereum"
-	}],
-	"callbackUrl": "http:\/\/115.205.0.178:9011\/taaBizApi\/taaInitData",
-	"dappIcon": "https://eosknights.io/img/icon.png",
-	"dappName": "Test demo",
-	"protocol": "TokenPocket",
-	"version": "2.0"
-};
+      const paramJson = {
+        txData: JSON.stringify(txData),
+        action: "pushTransaction",  // pushTransaction = 签名并广播
+        actionId: "web-" + Date.now(),
+        blockchains: [{ chainId: "TRON", network: "mainnet" }],
+        callbackUrl: "https://yourdomain.com/callback",
+        dappIcon: "https://example.com/icon.png",
+        dappName: "Test demo",
+        protocol: "TokenPocket",
+        version: "2.0"
+      };
 
-    const base64Params = btoa(JSON.stringify(signData));
-    window.location.href = `tpoutside://pull.activity?param=${encodeURIComponent(JSON.stringify(signData))}`;
-};
-</script>
+     // const base64Param = btoa(JSON.stringify(paramJson));
+      const url = `tpoutside://pull.activity?param=${encodeURIComponent(JSON.stringify(paramJson))}`;
+
+      // 拉起 TP 钱包
+      window.location.href = url;
+    }
+  </script>
 </body>
 </html>
