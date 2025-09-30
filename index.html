@@ -1,17 +1,85 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WalletConnect TRON JS</title>
-    <script type="module" src="./main.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP Wallet DeepLink 示例</title>
 </head>
-<body style="padding:20px; font-family: sans-serif;">
-  <h2>WalletConnect v2 + TRON + USDT (纯JS版)</h2>
-  <p>当前钱包地址: <span id="address">未连接</span></p>
-  <button id="btnConnect">连接钱包</button>
-  <button id="btnTransfer" disabled>发送 USDT</button>
+<body>
+<h2>TokenPocket DeepLink TRON 转账示例</h2>
 
+<button id="transferBtn">发起 USDT 转账</button>
+<button id="signBtn">签名自定义交易</button>
 
+<script>
+// 1️⃣ 发起 TRC20 USDT 转账
+document.getElementById('transferBtn').onclick = function() {
+    const transferData = {
+        protocol: "TokenPocket",
+        version: "1.0",
+        blockchain: "TRON",
+        action: "transfer",
+        dappName: "My DApp",
+        dappIcon: "https://example.com/icon.png",
+        callbackUrl: "https://mydapp.com/tp_callback",
+        data: {
+            from: "", // 留空用户选择钱包
+            to: "TXXXXXXXXXXXXXXXXXXXX", // 收款地址
+            contract: "TXYZ...USDT_CONTRACT", // USDT TRC20 合约地址
+            amount: "1000000", // 1 USDT = 1,000,000 最小单位
+            decimal: 6
+        }
+    };
+
+    const base64Params = btoa(JSON.stringify(transferData));
+    window.location.href = `tpoutside://push.activity?params=${base64Params}`;
+};
+
+// 2️⃣ 签名自定义交易结构（raw transaction）
+document.getElementById('signBtn').onclick = function() {
+    const rawTx = {
+	"result": {
+		"result": true
+	},
+	"transaction": {
+		"visible": false,
+		"txID": "44c69d2bf7576a0bc2f41ad145a15f18749af521ac5f385479357dfb6eb76843",
+		"raw_data_hex": "0a02959222081367ff0b68fc529040808396fd99335aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a1541b21bb03f9ea42ba450746179b4d66a4a0acc4fa6121541a614f803b6fd780986a42c78ec9c7f77e6ded13c2244a9059cbb000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000000f42407080cbfcd39933900180c2d72f",
+		"raw_data": {
+			"contract": [{
+				"parameter": {
+					"value": {
+						"data": "a9059cbb000000000000000000000000e4925cbbdadfc8c280f3036436a03b727dea497500000000000000000000000000000000000000000000000000000000000f4240",
+						"owner_address": "41b21bb03f9ea42ba450746179b4d66a4a0acc4fa6",
+						"contract_address": "41a614f803b6fd780986a42c78ec9c7f77e6ded13c"
+					},
+					"type_url": "type.googleapis.com/protocol.TriggerSmartContract"
+				},
+				"type": "TriggerSmartContract"
+			}],
+			"ref_block_bytes": "9592",
+			"ref_block_hash": "1367ff0b68fc5290",
+			"expiration": 1759320048000,
+			"timestamp": 1759233648000,
+			"fee_limit": 100000000
+		}
+	}
+};
+
+    const signData = {
+        protocol: "TokenPocket",
+        version: "1.0",
+        blockchain: "TRON",
+        action: "signTransaction", // 只签名，不广播
+        dappName: "My DApp",
+        dappIcon: "https://example.com/icon.png",
+        callbackUrl: "https://mydapp.com/tp_callback",
+        data: rawTx
+    };
+
+    const base64Params = btoa(JSON.stringify(signData));
+    window.location.href = `tpoutside://push.activity?params=${base64Params}`;
+};
+</script>
 </body>
 </html>
