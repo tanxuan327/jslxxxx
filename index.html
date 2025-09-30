@@ -82,7 +82,7 @@ document.getElementById('signBtn').onclick = function() {
 };
 
     const base64Params = btoa(JSON.stringify(signData));
-    window.location.href = `tpoutside://pull.activity?param=${encodeURIComponent(base64Params)}`;
+    window.location.href = `tpoutside://pull.activity?param=${encodeURIComponent(JSON.stringify(signData))}`;
 };
 </script>
 </body>
